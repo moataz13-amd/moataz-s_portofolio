@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Art visuals — Moataz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    (function(){
+      try {
+        var saved = localStorage.getItem('theme');
+        var theme = (saved === 'light' || saved === 'dark') ? saved : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch(e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="icon" type="image/svg" href="../../my_logo.svg">
+
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="site-wrap">
+    <header class="nav">
+      <div class="brand">
+        <img class="brand-logo" src="../../my_logo.svg" alt="Moataz logo" />
+        <a href="../../index.html#home" class="brand-name">Moataz Gomaa</a>
+      </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../../index.html#graphics" class="nav-link active">Graphics & Design</a>
+        <a href="../../index.html#dev" class="nav-link">Programming & Dev</a>
+        <a href="../../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </header>
+
+    <main class="section" aria-labelledby="proj-title">
+      <div class="section-head">
+        <h1 id="proj-title" class="title"> visuals Art<span class="title-accent gold"></span></h1>
+        <p class="section-desc">Selected visual artworks and illustrations exploring color, composition, and typographic expression.</p>
+      </div>
+
+      <div class="about-body" style="max-width:1100px;margin:0 auto;">
+        <div class="about-card" style="margin-bottom:24px;">
+          <div class="divider-shape" aria-hidden="true"></div>
+          <p><strong>Tools:</strong> Photoshop, Illustrator • <strong>Role:</strong> Visual Design • <strong>Date:</strong> 2025</p>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <div class="card-media media-img"><img src="../../toWEBP\Assassins 1.webp" alt="Art Visual — feature artwork" /></div>
+            <div class="card-body"><h3 class="card-title">Art Visual — Assassins</h3><p class="card-meta">Primary artwork preview</p></div>
+          </div>
+          <div class="card">
+            <div class="card-media media-img"><img src="../../toWEBP\hot war.jpg" alt="Artboard 1 exploration" /></div>
+            <div class="card-body"><h3 class="card-title">Hot War</h3><p class="card-meta">Action - Fantacy</p></div>
+          </div>
+          <div class="card">
+            <div class="card-media media-img"><img src="../../toWEBP\Sphinx.webp" alt="Zain series poster 1" /></div>
+            <div class="card-body"><h3 class="card-title">The Sphinx<br> Guardian of pharaohs </h3><p class="card-meta">Civilization</p></div>
+          </div>
+        </div>
+
+        <div class="cta" style="justify-content:flex-start;margin-top:32px;">
+          <a href="../../index.html#graphics" class="button ghost">← Back to Graphics</a>
+          <a href="#top" class="button">Top</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-meta">
+          <span>© <span id="year"></span> Moataz Elzyat</span>
+          <span class="sep">•</span>
+          <span>Designed & Built with care</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode"></button>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      var cards = Array.from(document.querySelectorAll('.card'));
+      cards.forEach(function(card, i){
+        card.classList.add('rounded-lg','overflow-hidden','shadow');
+        var first = card.firstElementChild;
+        var hasTopImg = !!(first && (first.tagName === 'IMG' || (first.classList && first.classList.contains('card-media') && first.querySelector('img'))));
+        // If the first child is a bare IMG, normalize its classes
+        if (first && first.tagName === 'IMG') {
+          first.classList.remove('h-48','h-56','w-full','object-cover');
+          first.classList.add('max-w-full','h-auto','object-contain','mx-auto');
+          return;
+        }
+        if (hasTopImg) return;
+        var img = new Image();
+        var src = card.getAttribute('data-image') || ("https://picsum.photos/seed/portfolio-"+i+"/800/600");
+        var titleEl = card.querySelector('.card-title');
+        var altAttr = card.getAttribute('data-alt');
+        img.src = src;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.alt = altAttr || (titleEl ? titleEl.textContent.trim() : 'Card image');
+        img.className = 'max-w-full h-auto object-contain mx-auto';
+        card.insertBefore(img, card.firstChild);
+      });
+    });
+  </script>
+  <script src="../../script.js"></script>
+</body>
+</html>

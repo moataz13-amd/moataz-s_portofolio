@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects — Moataz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="icon" type="image/svg" href="../../my_logo.svg">
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="site-wrap">
+    <header class="nav">
+      <div class="brand">
+        <img class="brand-logo" src="../../my_logo.svg" alt="Moataz logo" />
+        <a href="../../index.html#home" class="brand-name">Moataz Gomaa</a>
+      </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../../index.html#dev" class="nav-link active">Programming & Dev</a>
+        <a href="../../index.html#graphics" class="nav-link">Graphics & Design</a>
+        <a href="../../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </header>
+
+    <main class="section" aria-labelledby="proj-title">
+      <div class="section-head">
+        <h1 id="proj-title" class="title">Modern Frontend Experiences<span class="title-accent blue"></span></h1>
+        <p class="section-desc">Selected frontend projects that highlight clean code, responsive layouts, and engaging user interfaces.</p>
+      </div>
+
+      <div class="about-body" style="max-width:1100px;margin:0 auto;">
+        <div class="about-card" style="margin-bottom:24px;">
+          <div class="divider-shape" aria-hidden="true"></div>
+          <p><strong>Stack:</strong> HTML, JavaScript, Tailwind CSS • <strong>Role:</strong> Frontend Developer • <strong>Date:</strong> 2025</p>
+        </div>
+
+        <div class="cards" style="grid-template-columns: repeat1(1, 1fr);">
+          <div class="card">
+            <div class="card-media media-img"><img src="../../image1.png" alt="My Portofolio preview" /></div>
+            <div class="card-body"><h3 class="card-title">My Portofolio</h3><p class="card-meta">A glimpse into my web development and interface design work.</p></div>
+          </div>
+          <a class="card" href="https://egyfield.com" target="_blank" rel="noopener">
+            <div class="card-media media-img"><img src="../../image.png" alt="Wavefield preview" /></div>
+            <div class="card-body"><h3 class="card-title">EgyField E-Commerce</h3><p class="card-meta">Selected frontend projects showcasing my coding and UI skills.</p></div>
+          </a>
+        </div>
+
+        <div class="cta" style="justify-content:flex-start;margin-top:32px;">
+          <a class="button primary" href="#">Live Demo</a>
+          <a class="button ghost" href="../../index.html#dev">← Back to Dev</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-meta">
+          <span>© <span id="year"></span> Moataz Elzyat</span>
+          <span class="sep">•</span>
+          <span>Designed & Built with care</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode"></button>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      var cards = Array.from(document.querySelectorAll('.card'));
+      cards.forEach(function(card, i){
+        card.classList.add('rounded-lg','overflow-hidden','shadow');
+        if (card.hasAttribute('data-no-image')) return;
+        var first = card.firstElementChild;
+        var hasTopImg = !!(first && (first.tagName === 'IMG' || (first.classList && first.classList.contains('card-media') && first.querySelector('img'))));
+
+        // If a bare IMG is already first, normalize its classes to intrinsic sizing
+        if (first && first.tagName === 'IMG') {
+          first.classList.remove('h-48','h-56','w-full','object-cover');
+          first.classList.add('max-w-full','h-auto','object-contain','mx-auto');
+          return;
+        }
+        if (hasTopImg) return;
+
+        var img = new Image();
+        var src = card.getAttribute('data-image') || ("https://picsum.photos/seed/portfolio-"+i+"/800/600");
+        var titleEl = card.querySelector('.card-title');
+        var altAttr = card.getAttribute('data-alt');
+        img.src = src;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.alt = altAttr || (titleEl ? titleEl.textContent.trim() : 'Card image');
+        img.className = 'max-w-full h-auto object-contain mx-auto';
+        card.insertBefore(img, card.firstChild);
+      });
+    });
+  </script>
+  <script src="../../script.js"></script>
+</body>
+</html>

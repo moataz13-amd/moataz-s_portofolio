@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Console UI Kit — Moataz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="icon" type="image/svg" href="../../my_logo.svg">
+
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="site-wrap">
+    <header class="nav">
+      <div class="brand">
+        <img class="brand-logo" src="../../my_logo.svg" alt="Moataz logo" />
+        <a href="../../index.html#home" class="brand-name">Moataz Gomaa</a>
+      </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../../index.html#dev" class="nav-link active">Programming & Dev</a>
+        <a href="../../index.html#graphics" class="nav-link">Graphics & Design</a>
+        <a href="../../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </header>
+
+    <main class="section" aria-labelledby="proj-title">
+      <div class="section-head">
+        <h1 id="proj-title" class="title">Console UI Kit <span class="title-accent blue"></span></h1>
+        <p class="section-desc">A reusable UI kit featuring neon focus states and smooth animations.</p>
+      </div>
+
+      <div class="about-body" style="max-width:1100px;margin:0 auto;">
+        <div class="about-card" style="margin-bottom:24px;">
+          <div class="divider-shape" aria-hidden="true"></div>
+          <p><strong>Stack:</strong> React, Tailwind CSS, Framer Motion • <strong>Role:</strong> Frontend Developer • <strong>Date:</strong> 2025</p>
+        </div>
+
+        <div class="grid" style="grid-template-columns: repeat(2, 1fr);">
+          <div class="tile">
+            <div class="tile-header"><span class="dot green"></span><span class="dot yellow"></span><span class="dot red"></span><span class="title">Command Panel</span></div>
+            <div class="tile-body"><p>Palette, prompts, and command history with smooth motion.</p></div>
+            <div class="tile-footer"><span class="tag">A11y</span><span class="tag">Theme</span></div>
+          </div>
+          <div class="tile">
+            <div class="tile-header"><span class="dot green"></span><span class="dot yellow"></span><span class="dot red"></span><span class="title">Log Viewer</span></div>
+            <div class="tile-body"><p>Virtualized lines, highlights, and filters.</p></div>
+            <div class="tile-footer"><span class="tag">Performance</span><span class="tag">Virtual Scroll</span></div>
+          </div>
+        </div>
+
+        <div class="cta" style="justify-content:flex-start;margin-top:32px;">
+          <a class="button primary" href="#">Live Demo</a>
+          <a class="button ghost" href="../../index.html#dev">← Back to Dev</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-meta">
+          <span>© <span id="year"></span> Moataz Elzyat</span>
+          <span class="sep">•</span>
+          <span>Designed & Built with care</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode"></button>
+  <script src="../../script.js"></script>
+</body>
+</html>
