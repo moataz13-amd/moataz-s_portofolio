@@ -411,3 +411,11 @@ img { display: block; max-width: 100%; }
   * { animation: none !important; transition: none !important; }
   .card:hover .card-media { transform: none; }
 }
+
+/* Glass sheen for before/after cards */
+@keyframes glassSheen {
+  0% { transform: translateX(-40%); opacity: 0.0; }
+  10% { opacity: 0.35; }
+  50% { opacity: 0.15; }
+  100% { transform: translateX(140%); opacity: 0.0; }
+}

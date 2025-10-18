@@ -204,6 +204,7 @@ function init() {
   setupReveals();
   setupThemeToggle();
   setupContactForm();
+  initBeforeAfterSliders();
   document.getElementById('year').textContent = new Date().getFullYear();
 }
 
@@ -216,4 +217,91 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   setupMobileMenu();
   setupThemeToggle();
   document.getElementById('year').textContent = new Date().getFullYear();
+}
+
+// Before/After slider
+function initBeforeAfterSliders() {
+  const sliders = document.querySelectorAll('.before-after');
+  sliders.forEach((root) => setupBA(root));
+
+  function setupBA(root) {
+    const afterClip = root.querySelector('.ba-after-clip');
+    const handle = root.querySelector('.ba-handle');
+    const sheen = root.querySelector('.ba-sheen');
+    if (!afterClip || !handle) return;
+
+    let rect = root.getBoundingClientRect();
+    let pct = clampPct(parseFloat(root.getAttribute('data-initial')) || 50);
+    let dragging = false;
+
+    function clampPct(v) { return Math.max(0, Math.min(100, v)); }
+    function setPct(v, withTransition = false) {
+      pct = clampPct(v);
+      const x = (pct / 100) * rect.width;
+      afterClip.style.width = `${x}px`;
+      handle.style.transform = `translateX(${x}px)`;
+      if (withTransition) {
+        afterClip.style.transition = 'width 500ms cubic-bezier(.4,0,.2,1)';
+        handle.style.transition = 'transform 500ms cubic-bezier(.4,0,.2,1)';
+        clearTimeout(handle._t);
+        handle._t = setTimeout(() => {
+          afterClip.style.transition = '';
+          handle.style.transition = '';
+        }, 520);
+      }
+    }
+
+    function updateRect() { rect = root.getBoundingClientRect(); setPct(pct); }
+
+    function pointerToPct(clientX) {
+      const x = clientX - rect.left;
+      return (x / rect.width) * 100;
+    }
+
+    function onDown(e) {
+      dragging = true;
+      root.classList.add('dragging');
+      if (sheen) {
+        sheen.classList.add('animate-[glassSheen_1.6s_ease-in-out]','opacity-100');
+      }
+      const x = 'touches' in e ? e.touches[0].clientX : e.clientX;
+      setPct(pointerToPct(x));
+      e.preventDefault();
+    }
+    function onMove(e) {
+      if (!dragging) return;
+      const x = 'touches' in e ? e.touches[0].clientX : e.clientX;
+      setPct(pointerToPct(x));
+    }
+    function onUp() {
+      if (!dragging) return;
+      dragging = false;
+      root.classList.remove('dragging');
+      if (sheen) {
+        sheen.classList.remove('animate-[glassSheen_1.6s_ease-in-out]');
+        // keep a subtle fade-out
+        setTimeout(() => sheen.classList.remove('opacity-100'), 200);
+      }
+    }
+
+    root.addEventListener('mousedown', onDown);
+    root.addEventListener('touchstart', onDown, { passive: false });
+    window.addEventListener('mousemove', onMove, { passive: true });
+    window.addEventListener('touchmove', onMove, { passive: true });
+    window.addEventListener('mouseup', onUp, { passive: true });
+    window.addEventListener('touchend', onUp, { passive: true });
+    window.addEventListener('resize', () => updateRect());
+
+    // keyboard accessibility for handle
+    handle.addEventListener('keydown', (e) => {
+      const step = e.shiftKey ? 10 : 3;
+      if (e.key === 'ArrowLeft') { setPct(pct - step, true); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { setPct(pct + step, true); e.preventDefault(); }
+      if (e.key === 'Home') { setPct(0, true); e.preventDefault(); }
+      if (e.key === 'End') { setPct(100, true); e.preventDefault(); }
+    });
+
+    // Initialize
+    setPct(pct, true);
+  }
 }
