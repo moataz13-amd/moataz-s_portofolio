@@ -19,14 +19,15 @@
       } catch(e) {}
     })();
   </script>
-  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="preload" href="../../styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="../../styles.css"></noscript>
 </head>
 <body>
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
   <div class="site-wrap">
     <header class="nav">
       <div class="brand">
-        <img class="brand-logo" src="../../my_logo.svg" alt="Moataz logo" />
+        <img class="brand-logo" src="../../my_logo.svg" alt="Moataz logo" decoding="async" />
         <a href="../../index.html#home" class="brand-name">Moataz Gomaa</a>
       </div>
       <nav class="nav-links" aria-label="Primary">
@@ -53,31 +54,31 @@
 
         <div class="cards">
           <div class="card">
-            <div class="card-media media-img"><img src="../../toWEBP\abooubaida.webp" alt="Poster A — Gradient blast + Pop Art" /></div>
+            <div class="card-media media-img"><img src="../../toWEBP\abooubaida.webp" alt="Poster A — Gradient blast + Pop Art" loading="lazy" decoding="async" /></div>
             <div class="card-body"><h3 class="card-title">Abou Obaida</h3><p class="card-meta">Gradient blast + Pop Art</p></div>
           </div>
           <div class="card">
-            <div class="card-media media-img"><img src="../../toWEBP\almolatham.webp" alt="Poster B — Grid tension + gold accent" /></div>
+            <div class="card-media media-img"><img src="../../toWEBP\almolatham.webp" alt="Poster B — Grid tension + gold accent" loading="lazy" decoding="async" /></div>
             <div class="card-body"><h3 class="card-title">Almolatham</h3><p class="card-meta">Grid tension</p></div>
           </div>
           <div class="card">
-            <div class="card-media media-img"><img src="../../toWEBP\alqqssam.webp" alt="Poster C — Layered noise + blur" /></div>
+            <div class="card-media media-img"><img src="../../toWEBP\alqqssam.webp" alt="Poster C — Layered noise + blur" loading="lazy" decoding="async" /></div>
             <div class="card-body"><h3 class="card-title">Alqassam</h3><p class="card-meta">Layered noise + blur</p></div>
           </div>
           <div class="card">
-            <div class="card-media media-img"><img src="../../toWEBP\Artboard 1.webp" alt="Poster D — Chromatic type system" /></div>
+            <div class="card-media media-img"><img src="../../toWEBP\Artboard 1.webp" alt="Poster D — Chromatic type system" loading="lazy" decoding="async" /></div>
             <div class="card-body"><h3 class="card-title">Historical epic</h3><p class="card-meta">Chromatic type</p></div>
           </div>
           <div class="card">
-            <div class="card-media media-img"><img src="../../toWEBP\aqwal_maathoraArtboard-3.webp" alt="Poster D — Chromatic type system" /></div>
+            <div class="card-media media-img"><img src="../../toWEBP\aqwal_maathoraArtboard-3.webp" alt="Poster D — Chromatic type system" loading="lazy" decoding="async" /></div>
             <div class="card-body"><h3 class="card-title">Quote Designs</h3><p class="card-meta">Aqwal Maathora Poster</p></div>
           </div>
           <div class="card">
-            <div class="card-media media-img"><img src="../../toWEBP\ana.webp" alt="Poster D — Chromatic type system" /></div>
+            <div class="card-media media-img"><img src="../../toWEBP\ana.webp" alt="Poster D — Chromatic type system" loading="lazy" decoding="async" /></div>
             <div class="card-body"><h3 class="card-title">Literary posters</h3><p class="card-meta">Islamic</p></div>
           </div>
           <div class="card">
-            <div class="card-media media-img"><img src="../../toWEBP\motanabe.webp" alt="Poster D — Chromatic type system" /></div>
+            <div class="card-media media-img"><img src="../../toWEBP\motanabe.webp" alt="Poster D — Chromatic type system" loading="lazy" decoding="async" /></div>
             <div class="card-body"><h3 class="card-title">Arabic Calture</h3><p class="card-meta">Arabic calligraphy</p></div>
           </div>
         </div>
@@ -127,6 +128,6 @@
       });
     });
   </script>
-  <script src="../../script.js"></script>
+  <script src="../../script.js" defer></script>
 </body>
 </html>

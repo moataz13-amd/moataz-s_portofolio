@@ -11,6 +11,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+
     <script>
         (function() {
             try {
@@ -20,7 +21,8 @@
             } catch (e) {}
         })();
     </script>
-    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="preload" href="../../styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../../styles.css"></noscript>
 </head>
 
 <body>
@@ -28,7 +30,8 @@
     <div class="site-wrap">
         <header class="nav">
             <div class="brand">
-                <img class="brand-logo" src="../../my_logo.svg" alt="Moataz logo" />
+                <img class="brand-logo" src="../../my_logo.svg" alt="Moataz logo" decoding="async" />
+
                 <a href="../../index.html#home" class="brand-name">Moataz Gomaa</a>
             </div>
             <nav class="nav-links" aria-label="Primary">
@@ -56,56 +59,64 @@
 
                 <div class="cards">
                     <div class="card">
-                        <div class="card-media media-img"><img src="../../toWEBP\grand.webp" alt="Zain series — artwork 1" /></div>
+                        <div class="card-media media-img"><img src="../../toWEBP\grand.webp" alt="Zain series — artwork 1" loading="lazy" decoding="async" /></div>
+
                         <div class="card-body">
                             <h3 class="card-title">Zain Perfume The Frist Edition</h3>
                             <p class="card-meta">Primary</p>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-media media-img"><img src="../../toWEBP\zainArtboard-1.webp" alt="Zain series — artwork 1" /></div>
+                        <div class="card-media media-img"><img src="../../toWEBP\zainArtboard-1.webp" alt="Zain series — artwork 1" loading="lazy" decoding="async" /></div>
+
                         <div class="card-body">
                             <h3 class="card-title">Zain Perfume The Frist Edition</h3>
                             <p class="card-meta">Primary</p>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-media media-img"><img src="../../toWEBP\zainArtboard-2.webp" alt="Zain series — artwork 2" /></div>
+                        <div class="card-media media-img"><img src="../../toWEBP\zainArtboard-2.webp" alt="Zain series — artwork 2" loading="lazy" decoding="async" /></div>
+
                         <div class="card-body">
                             <h3 class="card-title">Gold Edition</h3>
                             <p class="card-meta">textured stock</p>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-media media-img"><img src="../../toWEBP\zainArtboard-3.webp" alt="Zain series — artwork 3" /></div>
+                        <div class="card-media media-img"><img src="../../toWEBP\zainArtboard-3.webp" alt="Zain series — artwork 3" loading="lazy" decoding="async" /></div>
+
                         <div class="card-body">
                             <h3 class="card-title">luxury Edition</h3>
                             <p class="card-meta">Color, type, layout rules</p>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-media media-img"><img src="../../toWEBP\Gym.webp" alt="Gym poster design" /></div>
+                        <div class="card-media media-img"><img src="../../toWEBP\Gym.webp" alt="Gym poster design" loading="lazy" decoding="async" /></div>
+
                         <div class="card-body">
                             <h3 class="card-title">Social Media Design for<br> Fit Life Gym</h3>
                             <p class="card-meta">Color <br> type <br> layout rules</p>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-media media-img"><img src="../../toWEBP\touristArtboard-1.webp" alt="Brand application mockup 1" /></div>
+                        <div class="card-media media-img"><img src="../../toWEBP\touristArtboard-1.webp" alt="Brand application mockup 1" loading="lazy" decoding="async" /></div>
+
                         <div class="card-body">
                             <h3 class="card-title">Soudi Tourist <br> Menistry of tourism </h3>
                             <p class="card-meta">Color, type, layout rules</p>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-media media-img"><img src="../../toWEBP\666666.webp" alt="Brand application mockup 2" /></div>
+                        <div class="card-media media-img"><img src="../../toWEBP\666666.webp" alt="Brand application mockup 2" loading="lazy" decoding="async" /></div>
+
                         <div class="card-body">
                             <h3 class="card-title">Soudi Tourist <br> Menistry of tourism</h3>
                             <p class="card-meta">Color, type, layout rules</p>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-media media-img"><img src="../../toWEBP\touristtest-2.webp" alt="Brand application mockup 2" /></div>
+                        <div class="card-media media-img"><img src="../../toWEBP\touristtest-2.webp" alt="Brand application mockup 2" loading="lazy" decoding="async" /></div>
+
                         <div class="card-body">
                             <h3 class="card-title">Soudi Tourist <br> Menistry of tourism</h3>
                             <p class="card-meta">Color, type, layout rules</p>
@@ -123,7 +134,7 @@
         <footer class="footer">
             <div class="footer-inner">
                 <div class="footer-meta">
-                    <span>© <span id="year"></span> Moataz Elzyat</span>
+                    <span> Moataz Elzyat</span>
                     <span class="sep">•</span>
                     <span>Designed & Built with care</span>
                 </div>
@@ -153,7 +164,8 @@
             });
         });
     </script>
-    <script src="../../script.js"></script>
+    <script src="../../script.js" defer></script>
+
 </body>
 
 </html>

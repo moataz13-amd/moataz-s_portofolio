@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="preload" href="../../styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="../../styles.css"></noscript>
   <link rel="icon" type="image/svg" href="../../my_logo.svg">
 </head>
 <body>
@@ -16,7 +17,7 @@
   <div class="site-wrap">
     <header class="nav">
       <div class="brand">
-        <img class="brand-logo" src="../../my_logo.svg" alt="Moataz logo" />
+        <img class="brand-logo" src="../../my_logo.svg" alt="Moataz logo" decoding="async" />
         <a href="../../index.html#home" class="brand-name">Moataz Gomaa</a>
       </div>
       <nav class="nav-links" aria-label="Primary">
@@ -43,11 +44,11 @@
 
         <div class="cards" style="grid-template-columns: repeat1(1, 1fr);">
           <div class="card">
-            <div class="card-media media-img"><img src="../../Screenshot 2025-09-14 044403.png" alt="My Portofolio preview" /></div>
+            <div class="card-media media-img"><img src="../../Screenshot 2025-09-14 044403.png" alt="My Portofolio preview" loading="lazy" decoding="async" /></div>
             <div class="card-body"><h3 class="card-title">My Portofolio</h3><p class="card-meta">A glimpse into my web development and interface design work.</p></div>
           </div>
           <a class="card" href="https://egyfield.com" target="_blank" rel="noopener">
-            <div class="card-media media-img"><img src="../../Screenshot 2025-10-20 000402.png" alt="Wavefield preview" /></div>
+            <div class="card-media media-img"><img src="../../Screenshot 2025-10-20 000402.png" alt="Wavefield preview" loading="lazy" decoding="async" /></div>
             <div class="card-body"><h3 class="card-title">EgyField E-Commerce</h3><p class="card-meta">Selected frontend projects showcasing my coding and UI skills.</p></div>
           </a>
         </div>
@@ -101,6 +102,6 @@
       });
     });
   </script>
-  <script src="../../script.js"></script>
+  <script src="../../script.js" defer></script>
 </body>
 </html>

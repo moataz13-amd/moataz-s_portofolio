@@ -195,29 +195,33 @@ function setupContactForm() {
   });
 }
 
-function init() {
+function startCanvas() {
   resize();
   initParticles();
   requestAnimationFrame(step);
+}
+
+// UI/light init as soon as DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
   handleActiveLinks();
   setupMobileMenu();
   setupReveals();
   setupThemeToggle();
   setupContactForm();
   initBeforeAfterSliders();
-  document.getElementById('year').textContent = new Date().getFullYear();
-}
+  var y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+});
 
+// Start heavy canvas after full load for better FID
+window.addEventListener('load', () => {
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    startCanvas();
+  }
+});
+
+// Keep canvas responsive when running
 window.addEventListener('resize', () => { resize(); initParticles(); });
-if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  init();
-} else {
-  // Reduced motion: still set year and basic handlers
-  handleActiveLinks();
-  setupMobileMenu();
-  setupThemeToggle();
-  document.getElementById('year').textContent = new Date().getFullYear();
-}
 
 // Before/After slider
 function initBeforeAfterSliders() {

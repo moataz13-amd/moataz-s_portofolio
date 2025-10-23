@@ -17,7 +17,8 @@
       } catch(e) {}
     })();
   </script>
-  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="preload" href="../../styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="../../styles.css"></noscript>
   <link rel="icon" type="image/svg" href="../../my_logo.svg">
 
 </head>
@@ -26,7 +27,7 @@
   <div class="site-wrap">
     <header class="nav">
       <div class="brand">
-        <img class="brand-logo" src="../../my_logo.svg" alt="Moataz logo" />
+        <img class="brand-logo" src="../../my_logo.svg" alt="Moataz logo" decoding="async" />
         <a href="../../index.html#home" class="brand-name">Moataz Gomaa</a>
       </div>
       <nav class="nav-links" aria-label="Primary">
@@ -53,15 +54,15 @@
 
         <div class="cards">
           <div class="card">
-            <div class="card-media media-img"><img src="../../toWEBP\Assassins 1.webp" alt="Art Visual — feature artwork" /></div>
+            <div class="card-media media-img"><img src="../../toWEBP\Assassins 1.webp" alt="Art Visual — feature artwork" loading="lazy" decoding="async" /></div>
             <div class="card-body"><h3 class="card-title">Art Visual — Assassins</h3><p class="card-meta">Primary artwork preview</p></div>
           </div>
           <div class="card">
-            <div class="card-media media-img"><img src="../../toWEBP\hot war.jpg" alt="Artboard 1 exploration" /></div>
+            <div class="card-media media-img"><img src="../../toWEBP\hot war.jpg" alt="Artboard 1 exploration" loading="lazy" decoding="async" /></div>
             <div class="card-body"><h3 class="card-title">Hot War</h3><p class="card-meta">Action - Fantacy</p></div>
           </div>
           <div class="card">
-            <div class="card-media media-img"><img src="../../toWEBP\Sphinx.webp" alt="Zain series poster 1" /></div>
+            <div class="card-media media-img"><img src="../../toWEBP\Sphinx.webp" alt="Zain series poster 1" loading="lazy" decoding="async" /></div>
             <div class="card-body"><h3 class="card-title">The Sphinx<br> Guardian of pharaohs </h3><p class="card-meta">Civilization</p></div>
           </div>
         </div>
@@ -112,6 +113,6 @@
       });
     });
   </script>
-  <script src="../../script.js"></script>
+  <script src="../../script.js" defer></script>
 </body>
 </html>
