@@ -1,326 +1,329 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b0f14" />
-  <title>Moataz — Futuristic Portfolio</title>
-  <meta name="description" content="A premium, futuristic portfolio blending creative design and advanced development projects." />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0f14" />
+    <title>Moataz — Futuristic Portfolio</title>
+    <meta name="description" content="A premium, futuristic portfolio blending creative design and advanced development projects." />
 
-  <!-- Fonts: modern sans + artistic display -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg" href="my_logo.svg">
+    <!-- Fonts: modern sans + artistic display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg" href="my_logo.svg">
 
-  <!-- Styles -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    (function(){
-      try {
-        var saved = localStorage.getItem('theme');
-        var theme = (saved === 'light' || saved === 'dark') ? saved : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-        document.documentElement.setAttribute('data-theme', theme);
-      } catch(e) { /* ignore */ }
-    })();
-  </script>
-  <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="styles.css"></noscript>
-  <link rel="preload" as="image" href="WhatsApp Image 2025-09-13 at 01.17.40_badc3265.jpg" fetchpriority="high">
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        (function() {
+            try {
+                var saved = localStorage.getItem('theme');
+                var theme = (saved === 'light' || saved === 'dark') ? saved : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) { /* ignore */ }
+        })();
+    </script>
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    <link rel="preload" as="image" href="WhatsApp Image 2025-09-13 at 01.17.40_badc3265.jpg" fetchpriority="high">
 </head>
-<body>
-  <!-- Abstract background canvas for particles / waves -->
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
-  <div class="site-wrap">
-    <!-- Navigation -->
-    <header class="nav backdrop-blur-2xl bg-white/10 border border-white/20">
-      <div class="brand">
-        <img class="brand-logo" src="my_logo.svg" alt="Moataz logo" decoding="async" />
-        <a href="#home" class="brand-name">Moataz Gomaa</a>
-      </div>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#tools" class="nav-link">Software & Tools</a>
-        <a href="#graphics" class="nav-link">Graphics & Design</a>
-        <a href="#dev" class="nav-link">Programming & Dev</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </nav>
-      <button class="nav-toggle" aria-label="Open menu" aria-controls="menu" aria-expanded="false">
+<body>
+    <!-- Abstract background canvas for particles / waves -->
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <div class="site-wrap">
+        <!-- Navigation -->
+        <header class="nav backdrop-blur-2xl bg-white/10 border border-white/20">
+            <div class="brand">
+                <img class="brand-logo" src="my_logo.svg" alt="Moataz logo" decoding="async" />
+                <a href="#home" class="brand-name">Moataz Gomaa</a>
+            </div>
+            <nav class="nav-links" aria-label="Primary">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#tools" class="nav-link">Software & Tools</a>
+                <a href="#graphics" class="nav-link">Graphics & Design</a>
+                <a href="#dev" class="nav-link">Programming & Dev</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            <button class="nav-toggle" aria-label="Open menu" aria-controls="menu" aria-expanded="false">
         <span></span><span></span>
       </button>
-    </header>
+        </header>
 
-    <!-- Hero / Landing -->
-    <main id="home" class="hero">
-      <div class="hero-inner grid-2">
-        <div class="hero-copy">
-          <div class="badge premium">Premium • Innovative • One-of-a-kind</div>
-          <h1 class="headline">
-            I'm <span class="glow gold">Moataz</span> —
-            <br />Graphic Designer & <span class="glow blue">Frontend Developer</span>
-          </h1>
-          <p class="subhead">I blend visual storytelling with precise engineering to craft one-of-a-kind experiences — from striking brand visuals to intelligent, high‑performance digital products.</p>
-          <div class="cta">
-            <a href="#graphics" class="button primary border border-white/20 backdrop-blur-md bg-[#02185e]/60 hover:bg-[#ff7852]/70 transition-colors">View Design Works</a>
-            <a href="#dev" class="button ghost border border-white/20 backdrop-blur-md bg-white/10 hover:bg-white/20 transition-colors">Explore Dev Projects</a>
-          </div>
-        </div>
-        <div class="hero-figure">
-          <div class="avatar-wrap">
-            <img class="avatar" src="WhatsApp Image 2025-09-13 at 01.17.40_badc3265.jpg" alt="Moataz profile portrait" decoding="async" fetchpriority="high"/>
-            <span class="ring ring-1"></span>
-            <span class="ring ring-2"></span>
-          </div>
-        </div>
-      </div>
+        <!-- Hero / Landing -->
+        <main id="home" class="hero">
+            <div class="hero-inner grid-2">
+                <div class="hero-copy">
+                    <div class="badge premium">Premium • Innovative • One-of-a-kind</div>
+                    <h1 class="headline">
+                        I'm <span class="glow gold">Moataz</span> —
+                        <br />Graphic Designer & <span class="glow blue">Frontend Developer</span>
+                    </h1>
+                    <p class="subhead">I blend visual storytelling with precise engineering to craft one-of-a-kind experiences — from striking brand visuals to intelligent, high‑performance digital products.</p>
+                    <div class="cta">
+                        <a href="#graphics" class="button primary border border-white/20 backdrop-blur-md bg-[#02185e]/60 hover:bg-[#ff7852]/70 transition-colors">View Design Works</a>
+                        <a href="#dev" class="button ghost border border-white/20 backdrop-blur-md bg-white/10 hover:bg-white/20 transition-colors">Explore Dev Projects</a>
+                    </div>
+                </div>
+                <div class="hero-figure">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="WhatsApp Image 2025-09-13 at 01.17.40_badc3265.jpg" alt="Moataz profile portrait" decoding="async" fetchpriority="high" />
+                        <span class="ring ring-1"></span>
+                        <span class="ring ring-2"></span>
+                    </div>
+                </div>
+            </div>
 
-      <!-- Floating corner accents -->
-      <div class="corner corner-tl" aria-hidden="true"></div>
-      <div class="corner corner-br" aria-hidden="true"></div>
-    </main>
+            <!-- Floating corner accents -->
+            <div class="corner corner-tl" aria-hidden="true"></div>
+            <div class="corner corner-br" aria-hidden="true"></div>
+        </main>
 
-    <!-- About Me Section -->
-    <section id="about" class="section section-about" aria-labelledby="about-title">
-      <div class="section-head">
-        <h2 id="about-title" class="title">About <span class="title-accent gold"></span></h2>
-        <p class="section-desc">I’m <strong>Moataz</strong>, a hybrid <em>Graphic Designer and Front-End Developer</em> passionate about crafting premium, future-ready experiences I design<span class="hi">distinctive brand identities</span>, build intuitive user interfaces, <span class="hi">and engineer scalable</span>, high-performance systems <span class="hi">always striving to</span> balance creativity with functionality.</p>
-      </div>
-      <div class="about-body">
-        <div class="about-card backdrop-blur-xl bg-white/10 border border-white/20">
-          <div class="divider-shape" aria-hidden="true"></div>
-          <p>Graphic Designer & Front-End Developer crafting creative, future-ready experiences.</p>
-        </div>
-      </div>
-    </section>
+        <!-- About Me Section -->
+        <section id="about" class="section section-about" aria-labelledby="about-title">
+            <div class="section-head">
+                <h2 id="about-title" class="title">About <span class="title-accent gold"></span></h2>
+                <p class="section-desc">I’m <strong>Moataz</strong>, a hybrid <em>Graphic Designer and Front-End Developer</em> passionate about crafting premium, future-ready experiences I design<span class="hi">distinctive brand identities</span>, build intuitive user interfaces,
+                    <span class="hi">and engineer scalable</span>, high-performance systems <span class="hi">always striving to</span> balance creativity with functionality.</p>
+            </div>
+            <div class="about-body">
+                <div class="about-card backdrop-blur-xl bg-white/10 border border-white/20">
+                    <div class="divider-shape" aria-hidden="true"></div>
+                    <p>Graphic Designer & Front-End Developer crafting creative, future-ready experiences.</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- Software & Tools Section -->
-    <section id="tools" class="section section-tools" aria-labelledby="tools-title">
-      <div class="section-head">
-        <h2 id="tools-title" class="title">Software & Tools <span class="title-accent blue"></span></h2>
-        <p class="section-desc">My daily toolkit spans visual design suites and engineering stacks — chosen for velocity, craft, and reliability.</p>
-      </div>
-      <div class="tools-grid">
-        <a class="tool-card" href="https://www.adobe.com/products/photoshop.html" target="_blank" rel="noreferrer">
-          <img src="https://unpkg.com/simple-icons@v11/icons/adobephotoshop.svg" alt="Adobe Photoshop icon" />
-          <span>Photoshop</span>
-        </a>
-        <a class="tool-card" href="https://www.adobe.com/products/illustrator.html" target="_blank" rel="noreferrer">
-          <img src="https://unpkg.com/simple-icons@v11/icons/adobeillustrator.svg" alt="Adobe Illustrator icon" />
-          <span>Illustrator</span>
-        </a>
-        <a class="tool-card" href="https://www.adobe.com/products/premierepro.html" target="_blank" rel="noreferrer">
-          <img src="https://unpkg.com/simple-icons@11.15.0/icons/adobepremierepro.svg" alt="Adobe Illustrator icon" />
-          <span>Premiere Pro</span>
-        </a>
-        <a class="tool-card" href="https://www.adobe.com/products/aftereffects.html" target="_blank" rel="noreferrer">
-          <img src="https://unpkg.com/simple-icons@v11/icons/adobeaftereffects.svg" alt="Adobe After Effects icon" />
-          <span>After Effects</span>
-        </a>
-        <a class="tool-card" href="https://www.figma.com/" target="_blank" rel="noreferrer">
-          <img src="https://unpkg.com/simple-icons@v11/icons/figma.svg" alt="Figma icon" />
-          <span>Figma</span>
-        </a>
-        <a class="tool-card" href="https://code.visualstudio.com/" target="_blank" rel="noreferrer">
-          <img src="https://unpkg.com/simple-icons@v11/icons/visualstudiocode.svg" alt="VS Code icon" />
-          <span>VS Code</span>
-        </a>
-        <a class="tool-card" href="https://git-scm.com/" target="_blank" rel="noreferrer">
-          <img src="https://unpkg.com/simple-icons@v11/icons/git.svg" alt="Git icon" />
-          <span>Git</span>
-        </a>
-        <a class="tool-card" href="https://github.com/" target="_blank" rel="noreferrer">
-          <img src="https://unpkg.com/simple-icons@v11/icons/github.svg" alt="GitHub icon" />
-          <span>GitHub</span>
-        </a>
-      </div>
-    </section>
+        <!-- Software & Tools Section -->
+        <section id="tools" class="section section-tools" aria-labelledby="tools-title">
+            <div class="section-head">
+                <h2 id="tools-title" class="title">Software & Tools <span class="title-accent blue"></span></h2>
+                <p class="section-desc">My daily toolkit spans visual design suites and engineering stacks — chosen for velocity, craft, and reliability.</p>
+            </div>
+            <div class="tools-grid">
+                <a class="tool-card" href="https://www.adobe.com/products/photoshop.html" target="_blank" rel="noreferrer">
+                    <img src="https://unpkg.com/simple-icons@v11/icons/adobephotoshop.svg" alt="Adobe Photoshop icon" />
+                    <span>Photoshop</span>
+                </a>
+                <a class="tool-card" href="https://www.adobe.com/products/illustrator.html" target="_blank" rel="noreferrer">
+                    <img src="https://unpkg.com/simple-icons@v11/icons/adobeillustrator.svg" alt="Adobe Illustrator icon" />
+                    <span>Illustrator</span>
+                </a>
+                <a class="tool-card" href="https://www.adobe.com/products/premierepro.html" target="_blank" rel="noreferrer">
+                    <img src="https://unpkg.com/simple-icons@11.15.0/icons/adobepremierepro.svg" alt="Adobe Illustrator icon" />
+                    <span>Premiere Pro</span>
+                </a>
+                <a class="tool-card" href="https://www.adobe.com/products/aftereffects.html" target="_blank" rel="noreferrer">
+                    <img src="https://unpkg.com/simple-icons@v11/icons/adobeaftereffects.svg" alt="Adobe After Effects icon" />
+                    <span>After Effects</span>
+                </a>
+                <a class="tool-card" href="https://www.figma.com/" target="_blank" rel="noreferrer">
+                    <img src="https://unpkg.com/simple-icons@v11/icons/figma.svg" alt="Figma icon" />
+                    <span>Figma</span>
+                </a>
+                <a class="tool-card" href="https://code.visualstudio.com/" target="_blank" rel="noreferrer">
+                    <img src="https://unpkg.com/simple-icons@v11/icons/visualstudiocode.svg" alt="VS Code icon" />
+                    <span>VS Code</span>
+                </a>
+                <a class="tool-card" href="https://git-scm.com/" target="_blank" rel="noreferrer">
+                    <img src="https://unpkg.com/simple-icons@v11/icons/git.svg" alt="Git icon" />
+                    <span>Git</span>
+                </a>
+                <a class="tool-card" href="https://github.com/" target="_blank" rel="noreferrer">
+                    <img src="https://unpkg.com/simple-icons@v11/icons/github.svg" alt="GitHub icon" />
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </section>
 
-    <!-- Graphics & Design Section -->
-    <section id="graphics" class="section section-graphics" aria-labelledby="graphics-title">
-      <div class="section-head">
-        <h2 id="graphics-title" class="title">
-          Graphics & Design
-          <span class="title-accent gold"></span>
-        </h2>
-        <p class="section-desc">Creative artworks, posters, branding, and social content crafted with bold typography, color, and narrative.</p>
-      </div>
+        <!-- Graphics & Design Section -->
+        <section id="graphics" class="section section-graphics" aria-labelledby="graphics-title">
+            <div class="section-head">
+                <h2 id="graphics-title" class="title">
+                    Graphics & Design
+                    <span class="title-accent gold"></span>
+                </h2>
+                <p class="section-desc">Creative artworks, posters, branding, and social content crafted with bold typography, color, and narrative.</p>
+            </div>
 
-      <div class="cards">
-        <!-- Sample cards; replace with real projects -->
-        <a class="card design rounded-lg overflow-hidden shadow relative group backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-[#02185e]/20 transition-colors" href="projects/design/neo-poster-series.html">
-          <div class="card-media media-img"><img src="toWEBP\pop.webp" alt="Pop Art Series poster preview" loading="lazy" decoding="async" /></div>
-          <span class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl transition duration-1000 -translate-x-1/3 group-hover:translate-x-1/3"></span>
-          <div class="card-body">
-            <h3 class="card-title">Pop Art Series</h3>
-            <p class="card-meta">Vibrant gradients • Maximal type • Print & Digital</p>
-          </div>
-        </a>
+            <div class="cards">
+                <!-- Sample cards; replace with real projects -->
+                <a class="card design rounded-lg overflow-hidden shadow relative group backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-[#02185e]/20 transition-colors" href="projects/design/neo-poster-series.html">
+                    <div class="card-media media-img"><img src="toWEBP\pop.webp" alt="Pop Art Series poster preview" loading="lazy" decoding="async" /></div>
+                    <span class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl transition duration-1000 -translate-x-1/3 group-hover:translate-x-1/3"></span>
+                    <div class="card-body">
+                        <h3 class="card-title">Pop Art Series</h3>
+                        <p class="card-meta">Vibrant gradients • Maximal type • Print & Digital</p>
+                    </div>
+                </a>
 
-        <a class="card design rounded-lg overflow-hidden shadow relative group backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-[#02185e]/20 transition-colors" href="projects/design/brand-system-aurea.html">
-          <div class="card-media media-img"><img src="toWEBP\social.webp" alt="Sports posters preview" loading="lazy" decoding="async" /></div>
-          <span class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl transition duration-1000 -translate-x-1/3 group-hover:translate-x-1/3"></span>
-          <div class="card-body">
-            <h3 class="card-title"> Social Media Designs</h3>
-            <p class="card-meta"> Social Media Campaign</p>
-          </div>
-        </a>
+                <a class="card design rounded-lg overflow-hidden shadow relative group backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-[#02185e]/20 transition-colors" href="projects/design/brand-system-aurea.html">
+                    <div class="card-media media-img"><img src="toWEBP\social.webp" alt="Sports posters preview" loading="lazy" decoding="async" /></div>
+                    <span class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl transition duration-1000 -translate-x-1/3 group-hover:translate-x-1/3"></span>
+                    <div class="card-body">
+                        <h3 class="card-title"> Social Media Designs</h3>
+                        <p class="card-meta"> Social Media Campaign</p>
+                    </div>
+                </a>
 
-        <a class="card design rounded-lg overflow-hidden shadow relative group backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-[#02185e]/20 transition-colors" href="projects/design/social-motion-set.html">
-          <div class="card-media media-img"><img src="toWEBP\sport.webp" alt="Social media designs preview" loading="lazy" decoding="async" /></div>
-          <span class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl transition duration-1000 -translate-x-1/3 group-hover:translate-x-1/3"></span>
-          <div class="card-body">
-            <h3 class="card-title">Sports posters</h3>
-            <p class="card-meta">Sports Field</p>
-          </div>
-        </a>
+                <a class="card design rounded-lg overflow-hidden shadow relative group backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-[#02185e]/20 transition-colors" href="projects/design/social-motion-set.html">
+                    <div class="card-media media-img"><img src="toWEBP\sport.webp" alt="Social media designs preview" loading="lazy" decoding="async" /></div>
+                    <span class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl transition duration-1000 -translate-x-1/3 group-hover:translate-x-1/3"></span>
+                    <div class="card-body">
+                        <h3 class="card-title">Sports posters</h3>
+                        <p class="card-meta">Sports Field</p>
+                    </div>
+                </a>
 
-        <a class="card design rounded-lg overflow-hidden shadow relative group backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-[#02185e]/20 transition-colors" href="projects/design/visual.html">
-          <div class="card-media media-img"><img src="toWEBP\wvisual.webp" alt="Art visuals cover image" loading="lazy" decoding="async" /></div>
-          <span class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl transition duration-1000 -translate-x-1/3 group-hover:translate-x-1/3"></span>
-          <div class="card-body">
-            <h3 class="card-title">Art</h3>
-            <p class="card-meta">Art visuals</p>
-          </div>
-        </a>
-      </div>
-    </section>
+                <a class="card design rounded-lg overflow-hidden shadow relative group backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-[#02185e]/20 transition-colors" href="projects/design/visual.html">
+                    <div class="card-media media-img"><img src="toWEBP\wvisual.webp" alt="Art visuals cover image" loading="lazy" decoding="async" /></div>
+                    <span class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl transition duration-1000 -translate-x-1/3 group-hover:translate-x-1/3"></span>
+                    <div class="card-body">
+                        <h3 class="card-title">Art</h3>
+                        <p class="card-meta">Art visuals</p>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-    <!-- Programming & Development Section -->
-    <section id="dev" class="section section-dev" aria-labelledby="dev-title">
-      <div class="section-head">
-        <h2 id="dev-title" class="title">
-          Programming & Development
-          <span class="title-accent blue"></span>
-        </h2>
-        <p class="section-desc">Web apps, systems, and experiments. Designed with clarity, performance, and delightful interaction.</p>
-      </div>
+        <!-- Programming & Development Section -->
+        <section id="dev" class="section section-dev" aria-labelledby="dev-title">
+            <div class="section-head">
+                <h2 id="dev-title" class="title">
+                    Programming & Development
+                    <span class="title-accent blue"></span>
+                </h2>
+                <p class="section-desc">Web apps, systems, and experiments. Designed with clarity, performance, and delightful interaction.</p>
+            </div>
 
-      <div class="grid">
-        <!-- Sample dev tiles -->
-        <a class="tile dev" href="projects/dev/console-ui-kit.html">
-          <div class="tile-header">
-            <span class="dot green"></span>
-            <span class="dot yellow"></span>
-            <span class="dot red"></span>
-            <span class="title">Console UI Kit</span>
-          </div>
-          <div class="tile-body">
-            <p>A reusable UI kit featuring neon focus states and smooth animations.</p>
-          </div>
-          <div class="tile-footer">
-            <span class="tag">React</span>
-            <span class="tag">Tailwind CSS</span>
-            <span class="tag">Framer Motion</span>
-          </div>
-        </a>
+            <div class="grid">
+                <!-- Sample dev tiles -->
+                <a class="tile dev" href="projects/dev/console-ui-kit.html">
+                    <div class="tile-header">
+                        <span class="dot green"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot red"></span>
+                        <span class="title">Console UI Kit</span>
+                    </div>
+                    <div class="tile-body">
+                        <p>A reusable UI kit featuring neon focus states and smooth animations.</p>
+                    </div>
+                    <div class="tile-footer">
+                        <span class="tag">React</span>
+                        <span class="tag">Tailwind CSS</span>
+                        <span class="tag">Framer Motion</span>
+                    </div>
+                </a>
 
-        <a class="tile dev" href="projects/dev/realtime-canvas-lab.html">
-          <div class="tile-header">
-            <span class="dot green"></span>
-            <span class="dot yellow"></span>
-            <span class="dot red"></span>
-            <span class="title">Frontend Projects</span>
-          </div>
-          <div class="tile-body">
-            <p>Selected frontend projects that highlight clean code, responsive layouts, and engaging user interfaces.</p>
-          </div>
-          <div class="tile-footer">
-            <span class="tag">HTML</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">Tailwind CSS</span>
-          </div>
-        </a>
+                <a class="tile dev" href="projects/dev/realtime-canvas-lab.html">
+                    <div class="tile-header">
+                        <span class="dot green"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot red"></span>
+                        <span class="title">Frontend Projects</span>
+                    </div>
+                    <div class="tile-body">
+                        <p>Selected frontend projects that highlight clean code, responsive layouts, and engaging user interfaces.</p>
+                    </div>
+                    <div class="tile-footer">
+                        <span class="tag">HTML</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Tailwind CSS</span>
+                    </div>
+                </a>
 
-        <a class="tile dev" href="projects/dev/insight-engine.html">
-          <div class="tile-header">
-            <span class="dot green"></span>
-            <span class="dot yellow"></span>
-            <span class="dot red"></span>
-            <span class="title">Insight Engine</span>
-          </div>
-          <div class="tile-body">
-            <p>A Front-End platform for data visualization and analytics, featuring a futuristic and modular user interface.</p>
-          </div>
-          <div class="tile-footer">
-            <span class="tag">Chat.js</span>
-            <span class="tag">HTML</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">Tailwind CSS</span>
-          </div>
-        </a>
-      </div>
-    </section>
+                <a class="tile dev" href="projects/dev/insight-engine.html">
+                    <div class="tile-header">
+                        <span class="dot green"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot red"></span>
+                        <span class="title">Insight Engine</span>
+                    </div>
+                    <div class="tile-body">
+                        <p>A Front-End platform for data visualization and analytics, featuring a futuristic and modular user interface.</p>
+                    </div>
+                    <div class="tile-footer">
+                        <span class="tag">HTML</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Tailwind CSS</span>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-    <!-- Contact Me Section -->
-    <section id="contact" class="section section-contact" aria-labelledby="contact-title">
-      <div class="section-head">
-        <h2 id="contact-title" class="title">Contact <span class="title-accent gold"></span></h2>
-        <p class="section-desc">Have a project in mind? Let’s make it extraordinary.</p>
-      </div>
-      <div class="contact-wrap">
-        <form class="contact-form" id="contactForm" novalidate>
-          <div class="row">
-            <label>
+        <!-- Contact Me Section -->
+        <section id="contact" class="section section-contact" aria-labelledby="contact-title">
+            <div class="section-head">
+                <h2 id="contact-title" class="title">Contact <span class="title-accent gold"></span></h2>
+                <p class="section-desc">Have a project in mind? Let’s make it extraordinary.</p>
+            </div>
+            <div class="contact-wrap">
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="row">
+                        <label>
               <span>Name</span>
               <input type="text" name="name" required placeholder="Your name" />
             </label>
-            <label>
+                        <label>
               <span>Email</span>
               <input type="email" name="email" required placeholder="you@example.com" />
             </label>
-          </div>
-          <label class="full">
+                    </div>
+                    <label class="full">
             <span>Message</span>
             <textarea name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
           </label>
-          <div class="form-actions">
-            <a href="mailto:mizoelzyat@gmail.com" class="button">Send Email</a>
-            <a class="button whatsapp" href="https://wa.me/201271946126" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">WhatsApp</a>
-          </div>
-        </form>
-        <div class="socials">
-          <a class="social" href="mailto:mizoelzyat@gmail.com" aria-label="Email">
-            <img src="https://unpkg.com/simple-icons@v11/icons/maildotru.svg" alt="Email" loading="lazy" decoding="async" />
-          </a>
-          <a class="social" href="https://www.linkedin.com/in/moatazgomaaa/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-            <img src="https://unpkg.com/simple-icons@v11/icons/linkedin.svg" alt="LinkedIn" loading="lazy" decoding="async" />
-          </a>
-          <a class="social" href="https://github.com/moataz13-amd" target="_blank" rel="noreferrer" aria-label="GitHub">
-            <img src="https://unpkg.com/simple-icons@v11/icons/github.svg" alt="GitHub" loading="lazy" decoding="async" />
-          </a>
-          <a class="social" href="https://www.behance.net/0af6906e" target="_blank" rel="noreferrer" aria-label="Behance">
-            <img src="https://unpkg.com/simple-icons@v11/icons/behance.svg" alt="Behance" loading="lazy" decoding="async" />
-          </a>
-          <a class="social" href="https://www.facebook.com/Mo3taz.gom3a" target="_blank" rel="noreferrer" aria-label="Behance">
-            <img src="https://unpkg.com/simple-icons@11.15.0/icons/facebook.svg" alt="Facebook" loading="lazy" decoding="async" />
-          </a>
-          <a class="social" href="https://www.instagram.com/mo3taz.v1/" target="_blank" rel="noreferrer" aria-label="Behance">
-            <img src="https://unpkg.com/simple-icons@11.15.0/icons/instagram.svg" alt="Instagram" loading="lazy" decoding="async" />
-          </a>
-          <a class="social" href="https://www.tiktok.com/@mo3tazg13" target="_blank" rel="noreferrer" aria-label="Behance">
-            <img src="https://unpkg.com/simple-icons@11.15.0/icons/tiktok.svg" alt="Instagram" loading="lazy" decoding="async" />
-          </a>
-  </div>
-</section>
+                    <div class="form-actions">
+                        <a href="mailto:mizoelzyat@gmail.com" class="button">Send Email</a>
+                        <a class="button whatsapp" href="https://wa.me/201271946126" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">WhatsApp</a>
+                    </div>
+                </form>
+                <div class="socials">
+                    <a class="social" href="mailto:mizoelzyat@gmail.com" aria-label="Email">
+                        <img src="https://unpkg.com/simple-icons@v11/icons/maildotru.svg" alt="Email" loading="lazy" decoding="async" />
+                    </a>
+                    <a class="social" href="https://www.linkedin.com/in/moatazgomaaa/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                        <img src="https://unpkg.com/simple-icons@v11/icons/linkedin.svg" alt="LinkedIn" loading="lazy" decoding="async" />
+                    </a>
+                    <a class="social" href="https://github.com/moataz13-amd" target="_blank" rel="noreferrer" aria-label="GitHub">
+                        <img src="https://unpkg.com/simple-icons@v11/icons/github.svg" alt="GitHub" loading="lazy" decoding="async" />
+                    </a>
+                    <a class="social" href="https://www.behance.net/0af6906e" target="_blank" rel="noreferrer" aria-label="Behance">
+                        <img src="https://unpkg.com/simple-icons@v11/icons/behance.svg" alt="Behance" loading="lazy" decoding="async" />
+                    </a>
+                    <a class="social" href="https://www.facebook.com/Mo3taz.gom3a" target="_blank" rel="noreferrer" aria-label="Behance">
+                        <img src="https://unpkg.com/simple-icons@11.15.0/icons/facebook.svg" alt="Facebook" loading="lazy" decoding="async" />
+                    </a>
+                    <a class="social" href="https://www.instagram.com/mo3taz.v1/" target="_blank" rel="noreferrer" aria-label="Behance">
+                        <img src="https://unpkg.com/simple-icons@11.15.0/icons/instagram.svg" alt="Instagram" loading="lazy" decoding="async" />
+                    </a>
+                    <a class="social" href="https://www.tiktok.com/@mo3tazg13" target="_blank" rel="noreferrer" aria-label="Behance">
+                        <img src="https://unpkg.com/simple-icons@11.15.0/icons/tiktok.svg" alt="Instagram" loading="lazy" decoding="async" />
+                    </a>
+                </div>
+        </section>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-meta">
-      <span>© <span id="year"></span> Moataz Elzyat</span>
-      <span class="sep">•</span>
-      <span>Designed & Built</span>
-    </div>
-  </div>
-</footer>
-</div>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-inner">
+                <div class="footer-meta">
+                    <span>© <span id="year"></span> Moataz Elzyat</span>
+                    <span class="sep">•</span>
+                    <span>Designed & Built</span>
+                </div>
+            </div>
+        </footer>
+        </div>
 
-  <!-- Floating Theme Toggle -->
-  <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode"></button>
+        <!-- Floating Theme Toggle -->
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode"></button>
 
-  <!-- Scripts -->
-  <script src="script.js" defer></script>
+        <!-- Scripts -->
+        <script src="script.js" defer></script>
 </body>
+
 </html>
