@@ -13,6 +13,9 @@ let particles = [];
 let width = 0, height = 0;
 let dpr = Math.min(window.devicePixelRatio || 1, 2);
 let currentTheme = 'dark';
+let rafId = null;
+let running = false;
+let frameCounter = 0;
 
 function getSavedTheme() {
   const saved = localStorage.getItem('theme');
@@ -39,7 +42,7 @@ function resize() {
 function rand(min, max) { return Math.random() * (max - min) + min; }
 
 function initParticles() {
-  const count = Math.floor(Math.min(120, width * height / 14000));
+  const count = Math.floor(Math.min(90, width * height / 22000));
   particles = new Array(count).fill(0).map(() => ({
     x: rand(0, width),
     y: rand(0, height),
@@ -52,16 +55,19 @@ function initParticles() {
 }
 
 function step() {
+  if (!running) return;
   ctx.clearRect(0, 0, width, height);
 
-  // subtle grid lines
-  ctx.save();
-  ctx.globalAlpha = 0.07;
-  ctx.strokeStyle = currentTheme === 'light' ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.06)';
-  const s = 28;
-  for (let x = 0; x < width; x += s) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke(); }
-  for (let y = 0; y < height; y += s) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke(); }
-  ctx.restore();
+  // subtle grid lines (draw every 6th frame to cut cost)
+  if ((frameCounter++ % 6) === 0) {
+    ctx.save();
+    ctx.globalAlpha = 0.07;
+    ctx.strokeStyle = currentTheme === 'light' ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.06)';
+    const s = 28;
+    for (let x = 0; x < width; x += s) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke(); }
+    for (let y = 0; y < height; y += s) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke(); }
+    ctx.restore();
+  }
 
   // connections
   for (let i = 0; i < particles.length; i++) {
@@ -99,7 +105,7 @@ function step() {
     ctx.fill();
   }
 
-  requestAnimationFrame(step);
+  rafId = requestAnimationFrame(step);
 }
 
 // Smooth nav active state
@@ -198,7 +204,8 @@ function setupContactForm() {
 function startCanvas() {
   resize();
   initParticles();
-  requestAnimationFrame(step);
+  running = true;
+  rafId = requestAnimationFrame(step);
 }
 
 // UI/light init as soon as DOM is ready
@@ -214,14 +221,28 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Start heavy canvas after full load for better FID
-window.addEventListener('load', () => {
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    startCanvas();
-  }
+window.addEventListener('load', () => {});
+
+// Keep canvas responsive when running (throttled)
+let _rzTO;
+window.addEventListener('resize', () => {
+  clearTimeout(_rzTO);
+  _rzTO = setTimeout(() => { resize(); initParticles(); }, 120);
 });
 
-// Keep canvas responsive when running
-window.addEventListener('resize', () => { resize(); initParticles(); });
+// Pause animation when tab hidden to save CPU/GPU
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    running = false;
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+  } else {
+    if (!running) {
+      running = true;
+      rafId = requestAnimationFrame(step);
+    }
+  }
+});
 
 // Before/After slider
 function initBeforeAfterSliders() {

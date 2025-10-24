@@ -244,6 +244,7 @@ img { display: block; max-width: 100%; }
 
 /* Sections */
 .section { padding: var(--space-7) var(--space-5); position: relative; }
+.section { content-visibility: auto; contain-intrinsic-size: 800px 600px; }
 .section-head { max-width: 1100px; margin: 0 auto var(--space-5); }
 .title { font-family: var(--font-display); font-size: clamp(28px, 3.6vw, 40px); letter-spacing: 0.3px; display: inline-flex; align-items: center; gap: 14px; }
 .title-accent { width: 52px; height: 6px; border-radius: 999px; display: inline-block; filter: blur(0.2px); }
@@ -304,6 +305,7 @@ img { display: block; max-width: 100%; }
   object-fit: contain; /* never crop */
   margin-left: auto;
   margin-right: auto;
+  content-visibility: auto;
 }
 
 .card-body { padding: var(--space-4); }
