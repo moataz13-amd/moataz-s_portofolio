@@ -154,7 +154,7 @@ function setupMobileMenu() {
 
 // Section reveal animations
 function setupReveals() {
-  const items = document.querySelectorAll('.card, .tile, .tool-card');
+  const items = document.querySelectorAll('.card, .tile, .tool-card, .skill-card');
   const io = new IntersectionObserver((entries) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
@@ -162,11 +162,25 @@ function setupReveals() {
           { transform: 'translateY(12px)', opacity: 0 },
           { transform: 'translateY(0)', opacity: 1 }
         ], { duration: 600, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'both' });
+
+        if (entry.target.classList.contains('skill-card')) {
+          animateSkillCard(entry.target);
+        }
         io.unobserve(entry.target);
       }
     }
   }, { threshold: 0.14 });
   items.forEach(el => io.observe(el));
+}
+
+function animateSkillCard(root) {
+  const pct = Math.max(0, Math.min(100, parseFloat(root.getAttribute('data-pct')) || 0));
+  const ring = root.querySelector('.skill-ring');
+  const bar = root.querySelector('.skill-bar');
+  const fill = root.querySelector('.skill-fill');
+  if (ring) ring.style.setProperty('--pct', pct + '%');
+  if (fill) fill.style.width = pct + '%';
+  if (bar) bar.setAttribute('aria-valuenow', String(pct));
 }
 
 // Theme toggle
