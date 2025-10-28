@@ -516,7 +516,13 @@ img { display: block; max-width: 100%; }
 
   .cards, .grid { grid-template-columns: 1fr; }
   .tools-grid { grid-template-columns: repeat(3, 1fr); }
-  .skills-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .skills-grid { grid-template-columns: 1fr; gap: var(--space-2); }
+  .skill-card { padding: 12px; }
+  .skill-top { grid-template-columns: 32px 1fr 32px; gap: 6px; margin-bottom: 6px; }
+  .skill-ico { width: 20px; height: 20px; }
+  .skill-ring { width: 28px; height: 28px; }
+  .skill-ring::after { inset: 3px; }
+  .skill-bar { height: 6px; }
   .hero { padding-top: var(--space-7); }
   .corner { display: none; }
   .hero-inner.grid-2 { grid-template-columns: 1fr; }
