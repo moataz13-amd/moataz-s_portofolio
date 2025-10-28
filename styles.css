@@ -516,7 +516,7 @@ img { display: block; max-width: 100%; }
 
   .cards, .grid { grid-template-columns: 1fr; }
   .tools-grid { grid-template-columns: repeat(3, 1fr); }
-  .skills-grid { grid-template-columns: 1fr; gap: var(--space-2); }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
   .skill-card { padding: 12px; }
   .skill-top { grid-template-columns: 32px 1fr 32px; gap: 6px; margin-bottom: 6px; }
   .skill-ico { width: 20px; height: 20px; }
