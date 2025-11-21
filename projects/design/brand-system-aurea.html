@@ -165,6 +165,252 @@
     </script>
     <script src="../../script.js" defer></script>
 
+    <!-- Lightbox Overlay for Design pages -->
+    <div class="lb-overlay" id="lightbox" aria-hidden="true">
+        <button class="lb-close" aria-label="Close" type="button">&times;</button>
+        <div class="lb-stage" role="dialog" aria-modal="true">
+            <button class="lb-nav lb-prev" aria-label="Previous" type="button">&#10094;</button>
+            <img class="lb-image" alt="" />
+            <button class="lb-nav lb-next" aria-label="Next" type="button">&#10095;</button>
+        </div>
+    </div>
+
+    <style>
+         :root {
+            --lb-bg: rgba(0, 0, 0, 0.88);
+            --lb-icon: #ffffff;
+            --lb-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            --lb-transition: 220ms ease;
+            --lb-img-radius: 10px;
+            --lb-hit: 44px;
+        }
+        
+        .lb-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--lb-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity var(--lb-transition), visibility var(--lb-transition);
+            z-index: 9999;
+        }
+        
+        .lb-overlay.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        
+        .lb-stage {
+            position: relative;
+            max-width: 92vw;
+            max-height: 92vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lb-image {
+            max-width: 92vw;
+            max-height: 88vh;
+            width: auto;
+            height: auto;
+            border-radius: var(--lb-img-radius);
+            box-shadow: var(--lb-shadow);
+            background: #111;
+            object-fit: contain;
+            opacity: 0;
+            transform: scale(0.985);
+            transition: opacity var(--lb-transition), transform var(--lb-transition);
+        }
+        
+        .lb-overlay.open .lb-image {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .lb-close {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            width: var(--lb-hit);
+            height: var(--lb-hit);
+            line-height: var(--lb-hit);
+            text-align: center;
+            font-size: 28px;
+            color: var(--lb-icon);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            opacity: .9;
+            transition: opacity var(--lb-transition), transform var(--lb-transition);
+            z-index: 10000;
+        }
+        
+        .lb-close:hover,
+        .lb-close:focus {
+            opacity: 1;
+            transform: scale(1.06);
+        }
+        
+        .lb-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: var(--lb-hit);
+            height: var(--lb-hit);
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--lb-icon);
+            font-size: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            transition: background var(--lb-transition), transform var(--lb-transition), opacity var(--lb-transition);
+            user-select: none;
+        }
+        
+        .lb-nav:hover,
+        .lb-nav:focus {
+            background: rgba(255, 255, 255, 0.22);
+            transform: translateY(-50%) scale(1.06);
+        }
+        
+        .lb-prev {
+            left: -66px;
+        }
+        
+        .lb-next {
+            right: -66px;
+        }
+        
+        @media (max-width: 768px) {
+            .lb-prev {
+                left: 8px;
+            }
+            .lb-next {
+                right: 8px;
+            }
+        }
+        
+        .lb-overlay.single .lb-nav {
+            display: none;
+        }
+        
+        body.lb-no-scroll {
+            overflow: hidden;
+        }
+    </style>
+
+    <script>
+        (function() {
+            var galleryImages = Array.prototype.slice.call(document.querySelectorAll('.cards img'));
+            var overlay = document.getElementById('lightbox');
+            if (!overlay || galleryImages.length === 0) return;
+            var imgEl = overlay.querySelector('.lb-image');
+            var btnClose = overlay.querySelector('.lb-close');
+            var btnPrev = overlay.querySelector('.lb-prev');
+            var btnNext = overlay.querySelector('.lb-next');
+            var currentIndex = -1;
+
+            function srcFor(i) {
+                var el = galleryImages[i];
+                return el.getAttribute('data-full') || el.currentSrc || el.src;
+            }
+
+            function altFor(i) {
+                var el = galleryImages[i];
+                return el.getAttribute('alt') || '';
+            }
+
+            function openAt(i) {
+                if (i < 0 || i >= galleryImages.length) return;
+                currentIndex = i;
+                imgEl.style.opacity = '0';
+                imgEl.style.transform = 'scale(0.985)';
+                imgEl.src = srcFor(currentIndex);
+                imgEl.alt = altFor(currentIndex);
+                overlay.classList.toggle('single', galleryImages.length <= 1);
+                overlay.classList.add('open');
+                overlay.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('lb-no-scroll');
+                preload(i - 1);
+                preload(i + 1);
+            }
+
+            function close() {
+                overlay.classList.remove('open');
+                overlay.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('lb-no-scroll');
+            }
+
+            function show(d) {
+                if (galleryImages.length <= 1) return;
+                currentIndex = (currentIndex + d + galleryImages.length) % galleryImages.length;
+                imgEl.style.opacity = '0';
+                imgEl.style.transform = 'scale(0.985)';
+                imgEl.src = srcFor(currentIndex);
+                imgEl.alt = altFor(currentIndex);
+                preload(currentIndex - 1);
+                preload(currentIndex + 1);
+            }
+
+            function preload(idx) {
+                var i = (idx + galleryImages.length) % galleryImages.length;
+                if (!galleryImages[i]) return;
+                var p = new Image();
+                p.src = srcFor(i);
+            }
+            imgEl.addEventListener('load', function() {
+                requestAnimationFrame(function() {
+                    imgEl.style.opacity = '1';
+                    imgEl.style.transform = 'scale(1)';
+                });
+            });
+            galleryImages.forEach(function(img, i) {
+                if (!img.style.cursor) img.style.cursor = 'zoom-in';
+                img.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openAt(i);
+                });
+                img.setAttribute('tabindex', img.getAttribute('tabindex') || '0');
+                img.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openAt(i);
+                    }
+                });
+            });
+            btnClose.addEventListener('click', close);
+            btnPrev.addEventListener('click', function() {
+                show(-1);
+            });
+            btnNext.addEventListener('click', function() {
+                show(1);
+            });
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) close();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (!overlay.classList.contains('open')) return;
+                if (e.key === 'Escape') {
+                    close();
+                } else if (e.key === 'ArrowRight') {
+                    show(1);
+                } else if (e.key === 'ArrowLeft') {
+                    show(-1);
+                }
+            });
+        })();
+    </script>
+
 </body>
 
 </html>
