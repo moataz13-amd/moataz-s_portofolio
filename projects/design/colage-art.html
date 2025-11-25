@@ -165,6 +165,7 @@
         </script>
         <script src="../../script.js" defer></script>
 
+        <!-- Lightbox Overlay for Design pages -->
         <div class="lb-overlay" id="lightbox" aria-hidden="true">
             <button class="lb-close" aria-label="Close" type="button">&times;</button>
             <div class="lb-stage" role="dialog" aria-modal="true">
@@ -172,6 +173,7 @@
                 <img class="lb-image" alt="" />
                 <button class="lb-nav lb-next" aria-label="Next" type="button">&#10095;</button>
             </div>
+            <div class="lb-thumbnails" role="tablist"></div>
         </div>
 
         <style>
@@ -242,7 +244,7 @@
             
             .lb-image {
                 max-width: 92vw;
-                max-height: 88vh;
+                max-height: 80vh;
                 width: auto;
                 height: auto;
                 border-radius: var(--lb-img-radius);
@@ -284,45 +286,65 @@
             }
             
             .lb-nav {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                width: var(--lb-hit);
-                height: var(--lb-hit);
-                border-radius: 50%;
-                border: none;
-                background: rgba(255, 255, 255, 0.12);
-                color: var(--lb-icon);
-                font-size: 28px;
-                display: inline-flex;
-                align-items: center;
+                display: none;
+            }
+            
+            .lb-thumbnails {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.92);
+                padding: 12px;
+                display: flex;
+                gap: 8px;
                 justify-content: center;
+                align-items: center;
+                overflow-x: auto;
+                opacity: 0;
+                transform: translateY(100%);
+                transition: opacity var(--lb-transition), transform var(--lb-transition);
+                z-index: 9998;
+            }
+            
+            .lb-overlay.open .lb-thumbnails {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .lb-thumb {
+                width: 60px;
+                height: 60px;
+                border-radius: 6px;
+                object-fit: cover;
                 cursor: pointer;
-                backdrop-filter: blur(4px);
-                transition: background var(--lb-transition), transform var(--lb-transition), opacity var(--lb-transition);
-                user-select: none;
+                border: 2px solid transparent;
+                transition: border-color var(--lb-transition), transform var(--lb-transition);
+                flex-shrink: 0;
             }
             
-            .lb-nav:hover,
-            .lb-nav:focus {
-                background: rgba(255, 255, 255, 0.22);
-                transform: translateY(-50%) scale(1.06);
+            .lb-thumb:hover,
+            .lb-thumb:focus {
+                border-color: rgba(255, 255, 255, 0.5);
+                transform: scale(1.05);
             }
             
-            .lb-prev {
-                left: -66px;
-            }
-            
-            .lb-next {
-                right: -66px;
+            .lb-thumb.active {
+                border-color: #fff;
             }
             
             @media (max-width: 768px) {
-                .lb-prev {
-                    left: 8px;
+                .lb-image {
+                    max-width: 90vw;
+                    max-height: 70vh;
                 }
-                .lb-next {
-                    right: 8px;
+                .lb-thumb {
+                    width: 50px;
+                    height: 50px;
+                }
+                .lb-thumbnails {
+                    padding: 8px;
+                    gap: 6px;
                 }
             }
             
@@ -339,12 +361,44 @@
             (function() {
                 var galleryImages = Array.prototype.slice.call(document.querySelectorAll('.cards img'));
                 var overlay = document.getElementById('lightbox');
+                var thumbnailsContainer = overlay.querySelector('.lb-thumbnails');
                 if (!overlay || galleryImages.length === 0) return;
                 var imgEl = overlay.querySelector('.lb-image');
                 var btnClose = overlay.querySelector('.lb-close');
                 var btnPrev = overlay.querySelector('.lb-prev');
                 var btnNext = overlay.querySelector('.lb-next');
                 var currentIndex = -1;
+
+                // Create thumbnails
+                function createThumbnails() {
+                    thumbnailsContainer.innerHTML = '';
+                    galleryImages.forEach(function(img, i) {
+                        var thumb = document.createElement('img');
+                        thumb.className = 'lb-thumb';
+                        thumb.src = img.src;
+                        thumb.alt = img.alt;
+                        thumb.setAttribute('role', 'tab');
+                        thumb.setAttribute('aria-selected', 'false');
+                        thumb.addEventListener('click', function() {
+                            openAt(i);
+                        });
+                        thumb.addEventListener('keydown', function(e) {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                openAt(i);
+                            }
+                        });
+                        thumbnailsContainer.appendChild(thumb);
+                    });
+                }
+
+                function updateThumbnails() {
+                    var thumbs = thumbnailsContainer.querySelectorAll('.lb-thumb');
+                    thumbs.forEach(function(thumb, i) {
+                        thumb.classList.toggle('active', i === currentIndex);
+                        thumb.setAttribute('aria-selected', i === currentIndex);
+                    });
+                }
 
                 function srcFor(i) {
                     var el = galleryImages[i];
@@ -367,6 +421,7 @@
                     overlay.classList.add('open');
                     overlay.setAttribute('aria-hidden', 'false');
                     document.body.classList.add('lb-no-scroll');
+                    updateThumbnails();
                     preload(i - 1);
                     preload(i + 1);
                 }
@@ -384,6 +439,7 @@
                     imgEl.style.transform = 'scale(0.985)';
                     imgEl.src = srcFor(currentIndex);
                     imgEl.alt = altFor(currentIndex);
+                    updateThumbnails();
                     preload(currentIndex - 1);
                     preload(currentIndex + 1);
                 }
@@ -394,6 +450,9 @@
                     var p = new Image();
                     p.src = srcFor(i);
                 }
+
+                createThumbnails();
+
                 imgEl.addEventListener('load', function() {
                     requestAnimationFrame(function() {
                         imgEl.style.opacity = '1';
